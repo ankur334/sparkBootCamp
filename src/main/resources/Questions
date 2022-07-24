@@ -1,0 +1,23 @@
+url
+user
+password
+datable
+
+Numeric or Timestamp column
+
+id - 1, 10000
+
+numOfPartition - 10
+partitionColumn - id
+lowerBound - 1
+upperBound - 10000
+
+
+select * from <table_name> where id >= 1 and id <= 1000
+select * from <table_name> where id >= 1001 and id <= 2000
+select * from <table_name> where id >= 2001 and id <= 3000
+.
+.
+.
+.
+.
