@@ -1,5 +1,7 @@
 package utils
 
+import org.apache.spark.sql.expressions.Window
+import org.apache.spark.sql.functions.{col, row_number}
 import org.apache.spark.sql.{DataFrame, DataFrameReader, SparkSession}
 
 import scala.collection.mutable.{Map => MutableMap}
@@ -97,6 +99,31 @@ object RelationalDbUtil {
     catch {
       case e: Exception => throw new UnsupportedOperationException("Error JDBC Fetch - " + e)
     }
+
+  }
+
+
+  def upsertData(oldDf: DataFrame, newDf: DataFrame): DataFrame = {
+    val combinedDF = oldDf.union(newDf)
+    combinedDF.show()
+    combinedDF.printSchema()
+
+    val windowSpec = Window.partitionBy("seller_id").orderBy(col("creation_date").desc)
+
+    val rankedDF = combinedDF.withColumn(
+      "r_number",
+      row_number().over(windowSpec)
+    )
+
+    rankedDF.show()
+    rankedDF.printSchema()
+
+    val filteredDF = rankedDF.filter(col("r_number") === 1).drop("r_number")
+
+    filteredDF.show()
+    filteredDF.printSchema()
+
+    filteredDF
 
   }
   
