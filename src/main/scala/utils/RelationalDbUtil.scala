@@ -105,7 +105,7 @@ object RelationalDbUtil {
 
   def upsertData(oldDf: DataFrame, newDf: DataFrame): DataFrame = {
     val combinedDF = oldDf.union(newDf)
-    combinedDF.show()
+    combinedDF.show(truncate = false)
     combinedDF.printSchema()
 
     val windowSpec = Window.partitionBy("seller_id").orderBy(col("creation_date").desc)

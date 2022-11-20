@@ -1,6 +1,6 @@
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
-ThisBuild / scalaVersion := "2.12.16"
+ThisBuild / scalaVersion := "2.12.15"
 
 lazy val root = (project in file("."))
   .settings(
@@ -14,5 +14,7 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.3.0" % "compile"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % Test
 // https://mvnrepository.com/artifact/org.postgresql/postgresql
 libraryDependencies += "org.postgresql" % "postgresql" % "42.4.0"
+// https://mvnrepository.com/artifact/org.apache.spark/spark-streaming
+libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.3.0" % "compile"
 
 
