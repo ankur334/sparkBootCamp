@@ -40,17 +40,17 @@ class RelationalDbUtilsTest extends AnyFunSuite {
 
   test("Test reading data from postgres") {
     val configs = Map(
-      "url" -> "jdbc:postgresql://localhost:5432/sparkbootcamp",
-      "user" -> "ankur",
-      "password" -> "niki&james",
-      "database" -> "sparkBootCamp",
-      "port" -> "5432",
+      "url" -> "jdbc:postgresql://localhost:5433/leetcode",
+      "user" -> "postgres",
+      "password" -> "postgres",
+      "database" -> "leetcode",
+      "port" -> "5433",
       "driver" -> "org.postgresql.Driver",
-      "dbtable" -> "sales10000",
-      "numPartitions" -> "10",
-      "partitionColumn" -> "seller_id",
+      "dbtable" -> "orders_586",
+      "numPartitions" -> "2",
+      "partitionColumn" -> "order_number",
       "lowerBound" -> "1",
-      "upperBound" -> "10000"
+      "upperBound" -> "5"
     )
 
     val extractedDF = getData(spark, configs)
